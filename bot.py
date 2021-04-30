@@ -30,11 +30,11 @@ for mention in mentions:
         print("processing image")
         screen_name = mention.author.screen_name
         id = mention.id_str
-        # text = mention.text.split(" ") 
-        # if len(text)<2 :
-        #     text="dankmemes"
-        # else:
-        #     text=text[1]
+        text = mention.text.split(" ") 
+        if len(text)<2 :
+            text="dankmemes"
+        else:
+            text=text[1]
         text="dankmemes"
         filename = "temp.jpg"
         reddit = praw.Reddit(client_id = client_id, 
@@ -54,11 +54,11 @@ for mention in mentions:
             image = api.media_upload(filename)
             os.remove(filename)
             check.append(mention.id)
-            with open('all_mentions', 'wb') as f:
-                pickle.dump(check, f)
+
 
         media_id=image.media_id_string
         api.update_status(status='@'+screen_name,in_reply_to_status_id=id,media_ids=[media_id])
-
+with open('all_mentions', 'wb') as f:
+    pickle.dump(check, f)
 
 
