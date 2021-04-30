@@ -18,17 +18,18 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(acess_token, acess_secret)
 api = tweepy.API(auth)
 
-mentions=api.mentions_timeline(count=20)
-
+mentions = api.mentions_timeline(count=20)
+api.mentions_timeline().clear()
+# print(dir(mention.user))
 check=[]
-
 for mention in mentions:
+    print(mention.user.name)
     if mention.id not in check:
         check.append(mention.id)
         screen_name = mention.author.screen_name
         id = mention.id_str
-        text=mention.text
-
+        text = mention.text
+        print(mention.id)
         filename = "temp.jpg"
         
         reddit = praw.Reddit(client_id = client_id, 
@@ -41,12 +42,11 @@ for mention in mentions:
         print(url)
 
         request = requests.get(url, stream=True)
-
         if request.status_code == 200:
             with open(filename, 'wb') as image:
                 for chunk in request:
                     image.write(chunk)
-            image=api.media_upload(filename)
+            image = api.media_upload(filename)
             os.remove(filename)
 
         media_id=image.media_id_string
