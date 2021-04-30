@@ -2,7 +2,8 @@ import tweepy
 import os
 import requests
 from dotenv import load_dotenv
-
+import praw
+import random
 
 load_dotenv()
 
@@ -10,6 +11,8 @@ consumer_key = os.getenv("consumer_key")
 consumer_secret = os.getenv("consumer_secret")
 acess_token = os.getenv("acess_token")
 acess_secret = os.getenv("acess_secret")
+client_id=os.getenv("client_id")
+client_secret=os.getenv("client_secret")
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(acess_token, acess_secret)
@@ -27,7 +30,16 @@ for mention in mentions:
         text=mention.text
 
         filename = "temp.jpg"
-        url = "https://preview.redd.it/d6i4k905snv61.jpg?width=640&height=424&crop=smart&auto=webp&s=bac4a75feb6d00e50139c0b54b1a96aaff877ccf"
+        
+        reddit = praw.Reddit(client_id = client_id, 
+                     client_secret = client_secret, 
+                     user_agent = 'meme-scraper')
+        subreddit=reddit.subreddit("dankmemes")
+        posts = subreddit.hot(limit=10)
+        urls=[post.url for post in posts if "https://v.redd.it" not in post.url and ".gif" not in post.url]
+        url=random.sample(urls,k=1)[0]
+        print(url)
+
         request = requests.get(url, stream=True)
 
         if request.status_code == 200:
@@ -38,7 +50,7 @@ for mention in mentions:
             os.remove(filename)
 
         media_id=image.media_id_string
-        api.update_status(status='@'+screen_name,in_reply_to_status_id=id,media_ids=[media_id])
+        # api.update_status(status='@'+screen_name,in_reply_to_status_id=id,media_ids=[media_id])
 
 
 
