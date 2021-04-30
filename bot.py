@@ -31,33 +31,39 @@ for mention in mentions:
         screen_name = mention.author.screen_name
         id = mention.id_str
         text = mention.text.split(" ") 
+
         if len(text)<2 :
             text="dankmemes"
         else:
             text=text[1]
-        text="dankmemes"
+        
         filename = "temp.jpg"
         reddit = praw.Reddit(client_id = client_id, 
                      client_secret = client_secret, 
                      user_agent = 'meme-scraper')
-        subreddit=reddit.subreddit(text)
-        posts = subreddit.hot(limit=10)
-        urls=[post.url for post in posts if "https://v.redd.it" not in post.url and ".gif" not in post.url]
-        url=random.sample(urls,k=1)[0]
+        try:
+            subreddit=reddit.subreddit(text)
+            posts = subreddit.hot(limit=10)
+            urls=[post.url for post in posts if "https://v.redd.it" not in post.url and ".gif" not in post.url]
+            url=random.sample(urls,k=1)[0]
 
-        request = requests.get(url, stream=True)
-        if request.status_code == 200:
-            print("sent image")
-            with open(filename, 'wb') as image:
-                for chunk in request:
-                    image.write(chunk)
-            image = api.media_upload(filename)
-            os.remove(filename)
-            check.append(mention.id)
+            request = requests.get(url, stream=True)
+            if request.status_code == 200:
+                with open(filename, 'wb') as image:
+                    for chunk in request:
+                        image.write(chunk)
+                image = api.media_upload(filename)
+                os.remove(filename)
+                check.append(mention.id)
+                media_id=image.media_id_string
+                api.update_status(status='@'+screen_name,in_reply_to_status_id=id,media_ids=[media_id])
+                print("sent image")
+
+        except Exception as e:
+            print("invalid subreddit name.skipping...")
 
 
-        media_id=image.media_id_string
-        api.update_status(status='@'+screen_name,in_reply_to_status_id=id,media_ids=[media_id])
+        
 with open('all_mentions', 'wb') as f:
     pickle.dump(check, f)
 
