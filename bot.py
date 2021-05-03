@@ -65,7 +65,7 @@ for mention in mentions:
 
 
         media_id=image.media_id_string
-        api.update_status(status='@'+screen_name,in_reply_to_status_id=id,media_ids=[media_id])
+        #api.update_status(status='@'+screen_name,in_reply_to_status_id=id,media_ids=[media_id])
 with open('all_mentions', 'wb') as f:
     pickle.dump(check, f)
 
