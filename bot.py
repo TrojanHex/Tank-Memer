@@ -16,6 +16,11 @@ client_id=argv[5]
 client_secret=argv[6]
 
 print(consumer_key[0])
+print(consumer_secret[0])
+print(acess_token[0])
+print(acess_secret[0])
+print(client_id[0])
+print(client_secret[0])
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(acess_token, acess_secret)
