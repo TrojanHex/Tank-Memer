@@ -43,6 +43,6 @@ jobs:
           acess_token: ${{ secrets.ACESS_TOKEN }}
           client_id: ${{ secrets.CLIENT_ID }}
           client_secret: ${{ secrets.CLIENT_SECRET }}
-        run: echo $consumer_key $consumer_secret  $acess_token $acess_secret $client_id $client_secret
+        run: python3 bot.py "$consumer_key" "$consumer_secret" "$acess_token" "$acess_secret" "$client_id" "$client_secret"
       - name: Echo message
         run : echo "Running"
