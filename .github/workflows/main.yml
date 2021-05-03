@@ -25,13 +25,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        env : 
-          consumer_key:${{ secrets.CONSUMER_KEY }}
-          consumer_secret:${{ secrets.CONSUMER_SECRET }}
-          acess_secret:${{ secrets.ACESS_SECRET }}
-          acess_token:${{ secrets.ACESS_TOKEN }}
-          client_id:${{ secrets.CLIENT_ID }}
-          client_secret:${{ secrets.CLIENT_SECRET }}
+      
       - run : |
           pip install tweepy requests praw python-dotenv --user
 
@@ -42,6 +36,13 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
+        env : 
+          consumer_key:${{ secrets.CONSUMER_KEY }}
+          consumer_secret:${{ secrets.CONSUMER_SECRET }}
+          acess_secret:${{ secrets.ACESS_SECRET }}
+          acess_token:${{ secrets.ACESS_TOKEN }}
+          client_id:${{ secrets.CLIENT_ID }}
+          client_secret:${{ secrets.CLIENT_SECRET }}
         run: python bot.py
       - name: Echo message
         run : echo "Running"
