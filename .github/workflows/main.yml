@@ -26,11 +26,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run : |
-          pip install tweepy
-          pip install python-dotenv
-          pip install requests
-          pip install praw
-          
+          pip install tweepy requests praw python-dotenv --user
+
 
       # Runs a single command using the runners shell
 #       - name: Run a one-line script
