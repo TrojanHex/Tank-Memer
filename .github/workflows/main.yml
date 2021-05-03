@@ -26,12 +26,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         env : 
-          consumer_key=${{secrets.CONSUMER_KEY}},
-          consumer_secret=${{secrets.CONSUMER_SECRET}},
-          acess_secret=${{secrets.ACESS_SECRET}},
-          acess_token=${{secrets.ACESS_TOKEN}},
-          client_id=${{secrets.CLIENT_ID}},
-          client_secret=${{secrets.CLIENT_SECRET}}
+          consumer_key:${{secrets.CONSUMER_KEY}},
+          consumer_secret:${{secrets.CONSUMER_SECRET}},
+          acess_secret:${{secrets.ACESS_SECRET}},
+          acess_token:${{secrets.ACESS_TOKEN}},
+          client_id:${{secrets.CLIENT_ID}},
+          client_secret:${{secrets.CLIENT_SECRET}}
       - run : |
           pip install tweepy requests praw python-dotenv --user
 
