@@ -1,11 +1,11 @@
 import tweepy
 import os
 import requests
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import praw
 import random
 import pickle
-load_dotenv()
+# load_dotenv()
 
 consumer_key = os.getenv("consumer_key")
 consumer_secret = os.getenv("consumer_secret")
