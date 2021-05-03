@@ -38,11 +38,11 @@ jobs:
       - name: Run a multi-line script
         env : 
           consumer_key:${{ secrets.CONSUMER_KEY }}
-          consumer_secret:${{ secrets.CONSUMER_SECRET }}
-          acess_secret:${{ secrets.ACESS_SECRET }}
-          acess_token:${{ secrets.ACESS_TOKEN }}
-          client_id:${{ secrets.CLIENT_ID }}
-          client_secret:${{ secrets.CLIENT_SECRET }}
+#           consumer_secret:${{ secrets.CONSUMER_SECRET }}
+#           acess_secret:${{ secrets.ACESS_SECRET }}
+#           acess_token:${{ secrets.ACESS_TOKEN }}
+#           client_id:${{ secrets.CLIENT_ID }}
+#           client_secret:${{ secrets.CLIENT_SECRET }}
         run: python bot.py
       - name: Echo message
         run : echo "Running"
