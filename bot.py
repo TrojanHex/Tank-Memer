@@ -5,14 +5,15 @@ import requests
 import praw
 import random
 import pickle
+from sys import argv
 # load_dotenv()
 
-consumer_key = os.getenv("consumer_key")
-consumer_secret = os.getenv("consumer_secret")
-acess_token = os.getenv("acess_token")
-acess_secret = os.getenv("acess_secret")
-client_id=os.getenv("client_id")
-client_secret=os.getenv("client_secret")
+consumer_key = argv[1]
+consumer_secret = argv[2]
+acess_token = argv[3]
+acess_secret = argv[4]
+client_id=argv[5]
+client_secret=argv[6]
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(acess_token, acess_secret)
