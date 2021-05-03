@@ -5,14 +5,22 @@ from dotenv import load_dotenv
 import praw
 import random
 import pickle
+import config
 load_dotenv()
 
-consumer_key = os.getenv("consumer_key")
-consumer_secret = os.getenv("consumer_secret")
-acess_token = os.getenv("acess_token")
-acess_secret = os.getenv("acess_secret")
-client_id=os.getenv("client_id")
-client_secret=os.getenv("client_secret")
+# consumer_key = os.getenv("consumer_key")
+# consumer_secret = os.getenv("consumer_secret")
+# acess_token = os.getenv("acess_token")
+# acess_secret = os.getenv("acess_secret")
+# client_id=os.getenv("client_id")
+# client_secret=os.getenv("client_secret")
+
+consumer_key=config.consumer_key
+consumer_secret=config.consumer_secret
+acess_secret=config.acess_secret
+acess_token=config.acess_token
+client_id=config.client_id
+client_secret=config.client_secret
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(acess_token, acess_secret)
